@@ -4,6 +4,7 @@ import { Fountain } from "./fountain";
 import { FountainWater } from "./fountain-water";
 import { useFountainWater } from "@/hooks/use-fountain-water";
 import { useRoundSignal } from "@/hooks/use-round-signal";
+import { assetPath } from "@/lib/asset-path";
 
 // Purely decorative scenery — no game state, no interaction, no logic.
 // Deliberately its own tree (src/components/background/), separate from
@@ -51,7 +52,7 @@ export function PiazzaBackdrop() {
       <div
         className="absolute inset-0 bg-no-repeat"
         style={{
-          backgroundImage: "url(/background/piazza.png)",
+          backgroundImage: `url(${assetPath("/background/piazza.png")})`,
           backgroundSize: "cover",
           backgroundPosition: BACKDROP_FOCUS_POSITION,
           imageRendering: "pixelated",

@@ -1,3 +1,4 @@
+import { assetPath } from "./asset-path";
 import type { CupId } from "./game-types";
 
 export const CUP_IDS: CupId[] = ["a", "b", "c"];
@@ -77,12 +78,12 @@ export interface SwooshClip {
 }
 
 export const SWOOSH_CLIPS: SwooshClip[] = [
-  { src: "/audios/swoosh-1.mp3", durationMs: 610 },
-  { src: "/audios/swoosh-2.mp3", durationMs: 675 },
-  { src: "/audios/swoosh-3.mp3", durationMs: 136 },
-  { src: "/audios/swoosh-4.mp3", durationMs: 644 },
-  { src: "/audios/swoosh-5.mp3", durationMs: 413 },
-  { src: "/audios/swoosh-6.mp3", durationMs: 286 },
+  { src: assetPath("/audios/swoosh-1.mp3"), durationMs: 610 },
+  { src: assetPath("/audios/swoosh-2.mp3"), durationMs: 675 },
+  { src: assetPath("/audios/swoosh-3.mp3"), durationMs: 136 },
+  { src: assetPath("/audios/swoosh-4.mp3"), durationMs: 644 },
+  { src: assetPath("/audios/swoosh-5.mp3"), durationMs: 413 },
+  { src: assetPath("/audios/swoosh-6.mp3"), durationMs: 286 },
 ];
 
 // Reserved for the rare bonus swap only — it's the longest clip, and the
@@ -90,7 +91,7 @@ export const SWOOSH_CLIPS: SwooshClip[] = [
 // case that can afford to play at its natural length instead of being
 // stretched to fit a fast-paced swap.
 export const BONUS_SWOOSH_CLIP: SwooshClip = {
-  src: "/audios/swoosh-bonus.mp3",
+  src: assetPath("/audios/swoosh-bonus.mp3"),
   durationMs: 780,
 };
 

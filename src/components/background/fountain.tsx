@@ -1,5 +1,7 @@
 "use client";
 
+import { assetPath } from "@/lib/asset-path";
+
 // The piazza's fountain — purely decorative, no game state or logic, same
 // rationale as table-platform.tsx for living here instead of
 // src/components/game/ (see CLAUDE.md §4 architecture boundaries).
@@ -14,7 +16,7 @@
 // anchor to each tip regardless of what size this component is rendered at.
 // Measured directly off public/background/fountain.png (native 723x529).
 
-const FOUNTAIN_SRC = "/background/fountain.png";
+const FOUNTAIN_SRC = assetPath("/background/fountain.png");
 // Native trimmed size, in px — keep the aspect ratio (723:529) if resizing.
 const FOUNTAIN_WIDTH_PX = 723;
 const FOUNTAIN_HEIGHT_PX = 529;

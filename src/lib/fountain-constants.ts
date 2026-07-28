@@ -1,3 +1,5 @@
+import { assetPath } from "./asset-path";
+
 // Tunable numbers for the fountain distractor — one place to retune, per
 // CLAUDE.md §4 ("Control"). See lib/fountain.ts for the plan algorithm these
 // feed, and hooks/use-fountain-water.ts for how the plan gets played out on
@@ -33,6 +35,6 @@ export const MIN_FAUCET_FLOW_MS = 800;
 // The ambient recording backing every faucet (see hooks/use-fountain-audio.ts).
 // One shared clip, played per-faucet from a random offset so repeats don't
 // sound identical; playback loops in case a faucet outlasts what's left of it.
-export const FOUNTAIN_AUDIO_SRC = "/audios/freesound_community-small-fountain-7073.mp3";
+export const FOUNTAIN_AUDIO_SRC = assetPath("/audios/freesound_community-small-fountain-7073.mp3");
 export const FOUNTAIN_AUDIO_CLIP_DURATION_MS = 45000;
 export const FOUNTAIN_AUDIO_VOLUME = 0.5;
