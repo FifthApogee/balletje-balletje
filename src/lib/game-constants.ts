@@ -10,8 +10,8 @@ export const SWAP_COUNT_MIN = 6;
 export const SWAP_COUNT_MAX = 10;
 // Kept a notch below SWAP_INTERVAL_MS_MIN so even the fastest randomized
 // swap finishes its slide before the next one starts (else cups teleport).
-export const SWAP_DURATION_MS = 230;
-export const SWAP_INTERVAL_MS_MIN = 250;
+export const SWAP_DURATION_MS = 200;
+export const SWAP_INTERVAL_MS_MIN = 220;
 export const SWAP_INTERVAL_MS_MAX = 380;
 
 // Pre-shuffle reveal choreography (starting position / wrong-guess reveal).

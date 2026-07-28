@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useMonteGame } from "@/hooks/use-monte-game";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -24,9 +23,10 @@ export function GameBoard() {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Pinned to the viewport corner, not the board — deliberately far from
-          the cups, and deliberately not part of the column drop below. */}
-      <div className="fixed top-6 left-6 flex flex-col gap-2">
+      {/* Pinned to the canvas corner (Stage, see stage.tsx), not the board —
+          deliberately far from the cups, and deliberately not part of the
+          column drop below. */}
+      <div className="absolute top-6 left-6 flex flex-col gap-2">
         <Scoreboard wins={score.wins} losses={score.losses} disabled={cupsInMotion} onReset={resetScore} />
         <AudioControls
           volume={audio.volume}
@@ -44,21 +44,11 @@ export function GameBoard() {
             {won ? "Correct!" : "Wrong!"}
           </p>
         )}
-
-        {/* Temporary: jumps to the visual-model preview page (table, legs,
-            ...). Remove this along with src/app/visual-test/ once the
-            visuals are settled. */}
-        <Link
-          href="/visual-test"
-          className="rounded-full border bg-background/80 px-4 py-1.5 text-center text-sm text-muted-foreground shadow-sm backdrop-blur hover:text-foreground"
-        >
-          Visual test page
-        </Link>
       </div>
 
       {/* Pinned at the same top-6 height as the wins/losses pill, centered
           independently of the (dropped, left-pinned) HUD stack above. */}
-      <h1 className="fixed top-6 left-1/2 -translate-x-1/2 rounded-full border bg-background/80 px-6 py-2 text-2xl font-semibold shadow-sm backdrop-blur">
+      <h1 className="absolute top-6 left-1/2 -translate-x-1/2 rounded-full border bg-background/80 px-6 py-2 text-2xl font-semibold shadow-sm backdrop-blur">
         Balletje-balletje
       </h1>
 
@@ -74,9 +64,9 @@ export function GameBoard() {
         />
       </div>
 
-      {/* Pinned to the bottom of the viewport, independent of the game
+      {/* Pinned to the bottom of the canvas, independent of the game
           column's own drop offset above. */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
         {phase === "idle" && (
           <Button className="h-16 px-8 text-xl" onClick={startRound}>
             Start

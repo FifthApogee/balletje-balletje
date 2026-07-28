@@ -5,6 +5,17 @@
 // later, when a piece of the backdrop (e.g. the clock hands) is replaced by
 // a live component and needs to land exactly where the art already draws it.
 
+// The whole game (backdrop + board) renders inside one fixed-resolution
+// canvas at exactly the piazza art's own native size — see
+// src/components/stage.tsx. Forcing a real 16:9 canvas (rather than
+// cropping the art to fit whatever the viewport happens to be, the previous
+// approach) means the art renders uncropped at all times, and every
+// pixel-tuned offset elsewhere (game-board.tsx, piazza-backdrop.tsx) only
+// ever needs to hold at this one resolution — Stage scales the whole canvas
+// uniformly to fit any real viewport or orientation.
+export const STAGE_WIDTH_PX = 1376;
+export const STAGE_HEIGHT_PX = 768;
+
 // Where the cobblestone ground meets the buildings — center vs. the raised
 // edges (the horizon line sweeps upward toward both sides of the image).
 export const HORIZON_Y_CENTER_PERCENT = 72.1;

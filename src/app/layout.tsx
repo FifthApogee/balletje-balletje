@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { PiazzaBackdrop } from "@/components/background/piazza-backdrop";
 import { RoundSignalProvider } from "@/components/round-signal-provider";
+import { Stage } from "@/components/stage";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,10 +30,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full">
         <RoundSignalProvider>
-          <PiazzaBackdrop />
-          {children}
+          <Stage>
+            <PiazzaBackdrop />
+            {children}
+          </Stage>
         </RoundSignalProvider>
       </body>
     </html>

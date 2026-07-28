@@ -59,7 +59,7 @@ export function Cup({ cupId, slotIndex, jitter, hasBall, hasTell, lifted, liftSt
     >
       {hasBall && (
         <div
-          className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-zinc-900 dark:bg-zinc-100"
+          className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-zinc-900"
           style={{ width: BALL_SIZE, height: BALL_SIZE }}
         />
       )}

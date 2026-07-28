@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 import { generateFountainPlan } from "@/lib/fountain";
 import { CONTINUE_CHANCE, FOUNTAIN_SPOUTS, INITIAL_DELAY_MS_MAX, INITIAL_DELAY_MS_MIN, type FountainSpout } from "@/lib/fountain-constants";
 import { randomInt } from "@/lib/shuffle";
@@ -19,7 +19,10 @@ function dryFlow(): Record<FountainSpout, boolean> {
   return Object.fromEntries(FOUNTAIN_SPOUTS.map((spout) => [spout, false])) as Record<FountainSpout, boolean>;
 }
 
-export function useFountainWater(roundStartToken: number): Record<FountainSpout, boolean> {
+export function useFountainWater(
+  roundStartToken: number,
+  suppressAmbientRef: RefObject<boolean>
+): Record<FountainSpout, boolean> {
   const [flowingSpouts, setFlowingSpouts] = useState<Record<FountainSpout, boolean>>(dryFlow);
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   // Wall-clock time the currently scheduled plan finishes; 0 while dry.
@@ -63,6 +66,18 @@ export function useFountainWater(roundStartToken: number): Record<FountainSpout,
   useEffect(() => {
     if (isInitialMountRef.current) {
       isInitialMountRef.current = false;
+      return;
+    }
+
+    // The rare explosion event (use-rare-event.ts) takes over the scene
+    // entirely on the round it fires — no fountain that round. That hook
+    // runs first (see piazza-backdrop.tsx) and sets this synchronously
+    // before this effect runs, in the same commit.
+    if (suppressAmbientRef.current) {
+      clearAllTimers();
+      stopAllAudio();
+      setFlowingSpouts(dryFlow());
+      activeUntilRef.current = 0;
       return;
     }
 
